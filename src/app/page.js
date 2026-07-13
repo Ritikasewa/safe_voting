@@ -9,8 +9,7 @@ export default function VotePage() {
   const [proposals, setProposals] = useState([]);
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const RPC_URL = "https://eth-sepolia.g.alchemy.com/v2/2EgVe-D3L0cs8Tg59dhkw";
+const RPC_URL = process.env.NEXT_PUBLIC_SEPOLIA_RPC_URL;
 
   async function loadProposals() {
     const provider = new ethers.JsonRpcProvider(RPC_URL);
