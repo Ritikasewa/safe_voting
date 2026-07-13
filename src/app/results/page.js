@@ -8,7 +8,7 @@ export default function ResultsPage() {
   const [proposals, setProposals] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const RPC_URL = "https://eth-sepolia.g.alchemy.com/v2/2EgVe-D3L0cs8Tg59dhkw";
+  const RPC_URL = process.env.NEXT_PUBLIC_SEPOLIA_RPC_URL;
 
   async function loadProposals() {
     setLoading(true);
