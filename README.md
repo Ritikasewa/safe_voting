@@ -1,6 +1,6 @@
 # On-Chain Voting DAO
 
-A simple proposal-and-voting system built on Ethereum (Sepolia testnet). An admin creates proposals, registered voters vote yes/no, and results are public and impossible to quietly tamper with — no wallet needed to check the results.
+A simple proposal and voting system built on Ethereum (Sepolia testnet). An admin creates proposals, registered voters vote yes/no, and results are public and impossible to quietly tamper with no wallet needed to check the results.
 
 **Live app:** https://safe-voting-9oaa.vercel.app
 **Contract (Sepolia):**
@@ -8,7 +8,7 @@ A simple proposal-and-voting system built on Ethereum (Sepolia testnet). An admi
 
 After building an on-chain certificate registry (see my other repo), I wanted a second project that used a different part of Solidity — something with actual logic and computation instead of just storing and looking up data. Voting/DAO-style contracts are a pretty standard pattern in the space (Uniswap, MakerDAO, and a bunch of others use some version of this), so it felt like a good way to practice access control on two different roles at once (admin vs. registered voter), array-based storage instead of mappings, and nested mappings for tracking who's voted on what.
 
-It's not meant to replace Google Forms for deciding where to order lunch from — for something low-stakes like that, a form is genuinely fine. This is more about the pattern you'd actually want when the people voting don't fully trust whoever's running the vote, and want to verify the count themselves instead of taking someone's word for it.
+It's not meant to replace Google Forms for deciding where to order lunch from ,for something low-stakes like that, a form is genuinely fine. This is more about the pattern you'd actually want when the people voting don't fully trust whoever's running the vote, and want to verify the count themselves instead of taking someone's word for it.
 
 ## How it works
 
@@ -23,13 +23,13 @@ Three pages:
 
 ## Tech stack
 
-Solidity + Foundry for the contract, tested with 5 passing tests (vote counting, blocking double votes, blocking non-registered voters, blocking non-admins from creating proposals, blocking votes on closed proposals). Deployed and verified on Sepolia. Frontend is Next.js + Tailwind, using ethers.js to talk to the contract — reads go through a public Alchemy RPC endpoint (no wallet needed), writes go through MetaMask.
+Solidity + Foundry for the contract, tested with 5 passing tests (vote counting, blocking double votes, blocking non-registered voters, blocking non-admins from creating proposals, blocking votes on closed proposals). Deployed and verified on Sepolia. Frontend is Next.js + Tailwind, using ethers.js to talk to the contract ,reads go through a public Alchemy RPC endpoint (no wallet needed), writes go through MetaMask.
 
 ## An honest limitation — gas fees per vote
 
 This is worth being upfront about: **every vote costs gas**, because voting changes data stored on the blockchain, and any state change requires a real transaction. On Sepolia this is free (fake test ETH), but on a mainnet deployment, every single voter would need to already hold crypto and pay a small fee just to cast a vote. For a real election with hundreds of voters who don't all have crypto wallets, that's a genuine adoption barrier, not a minor detail.
 
-There are known ways around this — gasless "meta-transactions" where voters sign a message for free and a relayer (paid by the organization, not the voter) submits the actual transaction, or deploying to a cheaper Layer 2 network instead of Ethereum mainnet directly. I didn't build either of those here, mostly because it would have doubled the scope of this project, but it's the first thing I'd tackle if I took this further.
+There are known ways around this  gasless "meta-transactions" where voters sign a message for free and a relayer (paid by the organization, not the voter) submits the actual transaction, or deploying to a cheaper Layer 2 network instead of Ethereum mainnet directly. I didn't build either of those here, mostly because it would have doubled the scope of this project, but it's the first thing I'd tackle if I took this further.
 
 ## Other things worth knowing
 
